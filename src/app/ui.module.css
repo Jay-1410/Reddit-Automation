@@ -226,9 +226,9 @@
 }
 
 .pageHeading h1 {
-  font-size: clamp(1.9rem, 3.2vw, 3rem);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
 .pageHeading p {
@@ -264,11 +264,11 @@
 .miniCard,
 .emptyState,
 .bottomBar {
-  padding: 18px;
+  padding: 16px;
 }
 
 .largeCard {
-  min-height: 140px;
+  min-height: 124px;
 }
 
 .eyebrow {
@@ -283,15 +283,15 @@
 .green { color: #86f0c6; }
 
 .card h3 {
-  font-size: 22px;
-  line-height: 1.18;
+  font-size: 19px;
+  line-height: 1.2;
 }
 
 .metricValue {
-  margin-top: 14px;
-  font-size: 40px;
+  margin-top: 12px;
+  font-size: 34px;
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
 }
 
 .note {
@@ -320,21 +320,21 @@
 .grid3 {
   display: grid;
   grid-template-columns: 1.2fr 0.9fr 0.9fr;
-  gap: 18px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .grid4 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .twoCol {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) 320px;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.4fr) 300px;
+  gap: 14px;
 }
 
 .feedList,
