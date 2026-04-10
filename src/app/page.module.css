@@ -1,0 +1,202 @@
+.page {
+  min-height: 100vh;
+  padding: 48px;
+  background:
+    radial-gradient(circle at top left, rgba(80, 120, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #0f172a 0%, #111827 100%);
+  color: #e5eefb;
+  font-family: var(--font-geist-sans);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: end;
+  margin: 0 auto 32px;
+  max-width: 1200px;
+}
+
+.eyebrow {
+  margin-bottom: 12px;
+  color: #8fb3ff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 720px;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  max-width: 680px;
+  margin-top: 18px;
+  color: #9fb0cc;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.heroCard,
+.metricCard,
+.panel {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.72);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(14px);
+}
+
+.heroCard {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.heroCard p {
+  margin-top: 6px;
+  color: #9fb0cc;
+  line-height: 1.6;
+}
+
+.statusDot {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+  border-radius: 999px;
+  background: #34d399;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 24px;
+}
+
+.metricCard {
+  padding: 24px;
+}
+
+.metricCard p {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.metricCard h2 {
+  margin: 12px 0 10px;
+  font-size: 34px;
+  letter-spacing: -0.04em;
+}
+
+.metricCard span {
+  color: #7dd3fc;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.panel {
+  padding: 24px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panelHeader h3 {
+  font-size: 22px;
+}
+
+.panelHeader span {
+  color: #8fb3ff;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.activityList,
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activityItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.activityItem:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.activityItem h4 {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.activityItem p,
+.taskList li {
+  color: #9fb0cc;
+  line-height: 1.6;
+}
+
+.activityItem span {
+  color: #7dd3fc;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.taskList {
+  padding-left: 20px;
+}
+
+.taskList li {
+  padding-left: 4px;
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .contentGrid,
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 24px;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+}
