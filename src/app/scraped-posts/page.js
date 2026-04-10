@@ -1,8 +1,28 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import { DashboardShell, Panel } from "../components";
 import { scrapedPosts } from "../data";
 import styles from "../ui.module.css";
 
+const dateRangeOptions = [
+  "Last 1 Hour",
+  "Last 3 Hours",
+  "Last 6 Hours",
+  "Last 12 Hours",
+  "Last 24 Hours",
+  "Yesterday",
+  "This Week",
+];
+
 export default function ScrapedPostsPage() {
+  const [dateRange, setDateRange] = useState("Last 24 Hours");
+
+  const filtered = useMemo(() => {
+    // UI-only placeholder: keep data static, wire real filtering later.
+    return scrapedPosts;
+  }, [dateRange]);
+
   return (
     <DashboardShell
       title="Scraped Posts"
@@ -11,14 +31,19 @@ export default function ScrapedPostsPage() {
       actions={<><button className={styles.softButton}>↓ Export CSV</button><button className={styles.actionButton}>◌ Force Sync</button></>}
     >
       <section className={styles.filterBar}>
-        {[
-          ["Date Range", "Last 24 Hours"],
-          ["Subreddit", "All Communities"],
-          ["Min. Relevance", "70%"],
-        ].map(([label, value]) => (
+        <div className={styles.filterBox}>
+          <label>Date Range</label>
+          <select className={styles.select} value={dateRange} onChange={(e) => setDateRange(e.target.value)}>
+            {dateRangeOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
+        </div>
+
+        {["Subreddit", "Min. Relevance"].map((label) => (
           <div key={label} className={styles.filterBox}>
             <label>{label}</label>
-            <div className={styles.filterValue}>{value} <span>▾</span></div>
+            <div className={styles.filterValue}>{label === "Subreddit" ? "All Communities" : "70%"} <span>▾</span></div>
           </div>
         ))}
       </section>
@@ -27,7 +52,7 @@ export default function ScrapedPostsPage() {
         <div className={styles.tableHeader}>
           <span>Date</span><span>Post Title</span><span>Subreddit</span><span>Score</span><span>Topic</span><span>Status</span><span>Action</span>
         </div>
-        {scrapedPosts.map((row) => (
+        {filtered.map((row) => (
           <div key={row[2]} className={styles.tableRow}>
             <div><div className={styles.cellTitle}>{row[0]}</div><div className={styles.tableCellMuted}>{row[1]}</div></div>
             <div><div className={styles.cellTitle}>{row[2]}</div><div className={styles.tableCellMuted}>reddit.com/r/comments/x7...</div></div>

@@ -548,11 +548,36 @@
 
 .filterBox label {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #dbe5ff;
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(145, 160, 191, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #eaf1ff;
+  outline: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(234, 241, 255, 0.7) 50%),
+    linear-gradient(135deg, rgba(234, 241, 255, 0.7) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(1em + 8px),
+    calc(100% - 12px) calc(1em + 8px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  font-size: 18px;
+}
+
+.select option {
+  color: #0a0f1f;
 }
 
 .filterValue {
