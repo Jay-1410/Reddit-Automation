@@ -14,7 +14,7 @@ export default function HomePage() {
         <StatCard eyebrow="Relevant posts found" value="42" note="3.2% Hit Rate" />
       </section>
 
-      <section className={styles.singleCol}>
+      <section className={styles.dashboardTwoCol}>
         <Panel title="Recent Scraped Posts" right={<span className={styles.note}>View All Posts</span>}>
           <div className={styles.feedList}>
             {dashboardPosts.map((post) => (
@@ -38,6 +38,25 @@ export default function HomePage() {
             ))}
           </div>
         </Panel>
+
+        <div className={styles.stacked}>
+          <Panel title="Notifications" right={<span className={styles.smallBadge}>Live</span>}>
+            <div className={styles.tableList}>
+              <div className={styles.filterValue}>⚡ New high relevance post detected <span className={styles.pill}>r/SaaS</span></div>
+              <div className={styles.filterValue}>🕒 Scraper cycle completed <span className={styles.pill}>2 min ago</span></div>
+              <div className={styles.filterValue}>✅ 3 drafts approved today <span className={styles.pill}>Safe</span></div>
+              <div className={styles.filterValue}>🔔 1 rule update detected <span className={styles.pill}>Review</span></div>
+            </div>
+          </Panel>
+
+          <Panel title="Activity">
+            <div className={styles.tableList}>
+              <div className={styles.feedMeta}><span className={styles.tag}>System</span><span>Indexed 1,284 posts</span><span className={styles.note}>today</span></div>
+              <div className={styles.feedMeta}><span className={styles.tag}>Queue</span><span>7 items waiting</span><span className={styles.note}>now</span></div>
+              <div className={styles.feedMeta}><span className={styles.tag}>Rules</span><span>5 communities monitored</span><span className={styles.note}>active</span></div>
+            </div>
+          </Panel>
+        </div>
       </section>
 
       <button className={styles.plusFloat}>⚡</button>
