@@ -39,16 +39,7 @@ export default function HomePage() {
           </div>
         </Panel>
 
-        <div className={styles.stacked}>
-          <section className={styles.card}>
-            <h3>Daily Engagement Reach</h3>
-            <div className={styles.miniChart}>
-              {[44, 72, 33, 86, 58, 97, 53, 79, 103].map((h, i) => (
-                <span key={i} style={{ height: `${h}px` }} />
-              ))}
-            </div>
-          </section>
-        </div>
+        <div className={styles.stacked} />
       </section>
 
       <button className={styles.plusFloat}>⚡</button>
