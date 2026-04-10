@@ -39,13 +39,7 @@ export default function HomePage() {
           </div>
         </Panel>
 
-        <Panel title="Insights" right={<span className={styles.smallBadge}>Today</span>}>
-          <div className={styles.tableList}>
-            <div className={styles.filterValue}>Top subreddit <span className={styles.pill}>r/SaaS</span></div>
-            <div className={styles.filterValue}>Avg relevance <span className={styles.pill}>94%</span></div>
-            <div className={styles.filterValue}>Queue status <span className={styles.pill}>Healthy</span></div>
-          </div>
-        </Panel>
+        <div />
       </section>
 
       <button className={styles.plusFloat}>⚡</button>
