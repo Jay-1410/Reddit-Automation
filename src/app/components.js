@@ -56,7 +56,6 @@ export function DashboardShell({ title, subtitle, searchPlaceholder, children, a
         </div>
 
         <div className={styles.sidebarBottom}>
-          <button className={styles.campaignButton}>+ New Campaign</button>
           <button className={styles.ghostButton}>⚙ Settings</button>
           <button className={styles.ghostButton}>❔ Support</button>
         </div>
