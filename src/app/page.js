@@ -40,30 +40,6 @@ export default function HomePage() {
         </Panel>
 
         <div className={styles.stacked}>
-          <section className={styles.queueCard}>
-            <div className={styles.queueTop}>
-              <div className={styles.panelHeader}>
-                <h3>Drafts Queue</h3>
-                <span className={styles.smallBadge}>08</span>
-              </div>
-              <p className={styles.note}>Waiting for your approval</p>
-            </div>
-            <div className={styles.queueBody}>
-              {draftQueue.map((item) => (
-                <div key={item.kind}>
-                  <p className={styles.eyebrow}>{item.kind}</p>
-                  <p>{item.text}</p>
-                  <div className={styles.actionRow} style={{ marginTop: 12 }}>
-                    <button className={styles.actionButton}>Approve</button>
-                    <button className={styles.iconButton}>🗑</button>
-                    <button className={styles.iconButton}>✎</button>
-                  </div>
-                </div>
-              ))}
-              <button className={styles.softButton}>See full queue</button>
-            </div>
-          </section>
-
           <section className={styles.card}>
             <h3>Daily Engagement Reach</h3>
             <div className={styles.miniChart}>
