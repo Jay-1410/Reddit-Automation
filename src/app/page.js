@@ -8,12 +8,10 @@ export default function HomePage() {
       title="Command Central"
       subtitle="Monitoring r/technology, r/saas, and 4 others."
       searchPlaceholder="Search across Reddit threads..."
-      actions={<StatCard title="Global Agent Status" note="Operational" footer={<div className={styles.progressTrack}><div className={styles.progressFill} style={{ width: "100%" }} /></div>} />}
     >
       <section className={styles.grid3}>
         <StatCard eyebrow="Total posts scraped today" value="1,284" note="↗12%" />
         <StatCard eyebrow="Relevant posts found" value="42" note="3.2% Hit Rate" />
-        <StatCard title="High Engagement Posts" note="Top threads requiring immediate attention." footer={<div className={styles.stacked}><div className={styles.filterValue}>⚡ “How do you automate your Red...” <span>42 Comments • 2h ago</span></div><div className={styles.filterValue}>⚡ “Anyone tried Ampere.sh yet? Lo...” <span>12 Comments • 45m ago</span></div></div>} large />
       </section>
 
       <section className={styles.twoCol}>
