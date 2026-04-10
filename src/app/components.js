@@ -37,8 +37,7 @@ export function DashboardShell({ title, subtitle, searchPlaceholder, children, a
           <div className={styles.brandWrap}>
             <div className={brandIcon ? styles.brandIcon : styles.brandMark}>{brandIcon ? "⚡" : ""}</div>
             <div>
-              <h2>Ampere.sh</h2>
-              <p>Reddit Agent v1.2</p>
+              <h2>Reddit Automation</h2>
             </div>
           </div>
 
