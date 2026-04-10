@@ -67,13 +67,6 @@ export function DashboardShell({ title, subtitle, searchPlaceholder, children, a
           <div className={styles.topbarRight}>
             <div className={styles.agentPill}><span className={styles.agentDot} /> Agent Online</div>
             <div className={styles.bell}>◔</div>
-            <div className={styles.profileCard}>
-              <div>
-                <strong>{profileName}</strong>
-                <p>{profileRole}</p>
-              </div>
-              <div className={styles.avatar}>👤</div>
-            </div>
           </div>
         </header>
 
