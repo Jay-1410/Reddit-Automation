@@ -268,7 +268,12 @@
 }
 
 .largeCard {
-  min-height: 124px;
+  min-height: 108px;
+}
+
+/* Tighten small KPI stat cards */
+.card {
+  min-height: unset;
 }
 
 .eyebrow {
@@ -288,10 +293,10 @@
 }
 
 .metricValue {
-  margin-top: 12px;
-  font-size: 34px;
+  margin-top: 10px;
+  font-size: 30px;
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
 }
 
 .note {
