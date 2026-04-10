@@ -14,7 +14,7 @@ export default function HomePage() {
         <StatCard eyebrow="Relevant posts found" value="42" note="3.2% Hit Rate" />
       </section>
 
-      <section className={styles.twoCol}>
+      <section className={styles.singleCol}>
         <Panel title="Recent Scraped Posts" right={<span className={styles.note}>View All Posts</span>}>
           <div className={styles.feedList}>
             {dashboardPosts.map((post) => (
@@ -38,8 +38,6 @@ export default function HomePage() {
             ))}
           </div>
         </Panel>
-
-        <div />
       </section>
 
       <button className={styles.plusFloat}>⚡</button>

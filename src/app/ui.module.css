@@ -346,13 +346,13 @@
   gap: 14px;
 }
 
+.singleCol {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
 /* Dashboard desktop: use full horizontal space */
 @media (min-width: 1280px) {
-  .twoCol {
-    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
-    align-items: start;
-  }
-
   .grid3 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
