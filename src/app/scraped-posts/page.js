@@ -15,7 +15,6 @@ export default function ScrapedPostsPage() {
           ["Date Range", "Last 24 Hours"],
           ["Subreddit", "All Communities"],
           ["Min. Relevance", "70%"],
-          ["Status", "All   New   Flagged"],
         ].map(([label, value]) => (
           <div key={label} className={styles.filterBox}>
             <label>{label}</label>
