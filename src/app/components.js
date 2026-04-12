@@ -8,26 +8,18 @@ import styles from "./ui.module.css";
 function Icon({ type }) {
   const common = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round", strokeLinejoin: "round" };
   switch (type) {
-    case "grid":
-      return <svg {...common}><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>;
-    case "posts":
-      return <svg {...common}><path d="M4 5h16v14H4z" /><path d="M8 9h8" /><path d="M8 13h8" /><path d="M8 17h5" /></svg>;
-    case "trend":
-      return <svg {...common}><path d="M4 16l5-5 4 4 7-7" /><path d="M20 8v5h-5" /></svg>;
-    case "comment":
-      return <svg {...common}><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
-    case "draft":
-      return <svg {...common}><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z" /></svg>;
-    case "rules":
-      return <svg {...common}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
-    case "approval":
-      return <svg {...common}><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>;
-    default:
-      return <svg {...common}><circle cx="12" cy="12" r="9" /></svg>;
+    case "grid": return <svg {...common}><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /></svg>;
+    case "posts": return <svg {...common}><path d="M4 5h16v14H4z" /><path d="M8 9h8" /><path d="M8 13h8" /><path d="M8 17h5" /></svg>;
+    case "trend": return <svg {...common}><path d="M4 16l5-5 4 4 7-7" /><path d="M20 8v5h-5" /></svg>;
+    case "comment": return <svg {...common}><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
+    case "draft": return <svg {...common}><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z" /></svg>;
+    case "rules": return <svg {...common}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
+    case "approval": return <svg {...common}><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>;
+    default: return <svg {...common}><circle cx="12" cy="12" r="9" /></svg>;
   }
 }
 
-export function DashboardShell({ title, subtitle, searchPlaceholder, children, actions, profileName = "Alex Rivera", profileRole = "Admin Level 4", brandIcon = false }) {
+export function DashboardShell({ title, subtitle, searchPlaceholder, children, actions, brandTitle = "Reddit Automation" }) {
   const pathname = usePathname();
 
   return (
@@ -35,9 +27,9 @@ export function DashboardShell({ title, subtitle, searchPlaceholder, children, a
       <aside className={styles.sidebar}>
         <div>
           <div className={styles.brandWrap}>
-            <div className={brandIcon ? styles.brandIcon : styles.brandMark}>{brandIcon ? "⚡" : ""}</div>
+            <div className={styles.brandIcon}>⚡</div>
             <div>
-              <h2>Reddit Automation</h2>
+              <h2>{brandTitle}</h2>
             </div>
           </div>
 

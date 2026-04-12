@@ -1,29 +1,31 @@
 import { DashboardShell, Panel, StatCard } from "./components";
-import { dashboardPosts, draftQueue } from "./data";
+import { dashboardMetrics, dashboardPosts, dashboardTimeline } from "./data";
 import styles from "./ui.module.css";
 
 export default function HomePage() {
   return (
     <DashboardShell
-      title="Command Central"
-      subtitle="Monitoring r/technology, r/saas, and 4 others."
-      searchPlaceholder="Search across Reddit threads..."
+      title="Campaign Overview"
+      subtitle="A focused workspace for monitoring posts, generating drafts, and reviewing approvals."
+      searchPlaceholder="Search campaigns, posts, or communities..."
+      actions={<><button className={styles.softButton}>Export</button><button className={styles.actionButton}>New Campaign</button></>}
     >
-      <section className={styles.grid3}>
-        <StatCard eyebrow="Total posts scraped today" value="1,284" note="↗12%" />
-        <StatCard eyebrow="Relevant posts found" value="42" note="3.2% Hit Rate" />
+      <section className={styles.metricGrid}>
+        {dashboardMetrics.map((item) => (
+          <StatCard key={item.label} eyebrow={item.label} value={item.value} note={item.note} />
+        ))}
       </section>
 
-      <section className={styles.dashboardTwoCol}>
-        <Panel title="Recent Scraped Posts" right={<span className={styles.note}>View All Posts</span>}>
+      <section className={styles.dashboardSplit}>
+        <Panel title="Priority Feed" right={<span className={styles.note}>Live ranking</span>}>
           <div className={styles.feedList}>
             {dashboardPosts.map((post) => (
-              <article key={post.title} className={styles.feedCard}>
+              <article key={post.id} className={styles.feedCard}>
                 <div className={styles.feedMeta}>
                   <span className={styles.tag}>{post.subreddit}</span>
-                  <span>Posted by {post.author}</span>
+                  <span>{post.author}</span>
                   <span>{post.age}</span>
-                  <span className={styles.pill}>{post.sentiment}</span>
+                  <span className={styles.pill}>{post.urgency}</span>
                 </div>
                 <h4>{post.title}</h4>
                 <p>{post.body}</p>
@@ -39,27 +41,30 @@ export default function HomePage() {
           </div>
         </Panel>
 
-        <div className={styles.stacked}>
-          <Panel title="Notifications" right={<span className={styles.smallBadge}>Live</span>}>
-            <div className={styles.tableList}>
-              <div className={styles.filterValue}>⚡ New high relevance post detected <span className={styles.pill}>r/SaaS</span></div>
-              <div className={styles.filterValue}>🕒 Scraper cycle completed <span className={styles.pill}>2 min ago</span></div>
-              <div className={styles.filterValue}>✅ 3 drafts approved today <span className={styles.pill}>Safe</span></div>
-              <div className={styles.filterValue}>🔔 1 rule update detected <span className={styles.pill}>Review</span></div>
+        <div className={styles.stackColumn}>
+          <Panel title="Pipeline Status">
+            <div className={styles.miniPills}>
+              <div className={styles.filterValue}>Scraping <span className={styles.safe}>On</span></div>
+              <div className={styles.filterValue}>Drafting <span className={styles.pill}>18 ready</span></div>
+              <div className={styles.filterValue}>Review <span className={styles.pill}>7 pending</span></div>
             </div>
           </Panel>
 
-          <Panel title="Activity">
+          <Panel title="Recent Activity">
             <div className={styles.tableList}>
-              <div className={styles.feedMeta}><span className={styles.tag}>System</span><span>Indexed 1,284 posts</span><span className={styles.note}>today</span></div>
-              <div className={styles.feedMeta}><span className={styles.tag}>Queue</span><span>7 items waiting</span><span className={styles.note}>now</span></div>
-              <div className={styles.feedMeta}><span className={styles.tag}>Rules</span><span>5 communities monitored</span><span className={styles.note}>active</span></div>
+              {dashboardTimeline.map((item) => (
+                <div key={item.label} className={styles.timelineItem}>
+                  <span className={`${styles.dot} ${styles[item.tone]}`} />
+                  <div>
+                    <strong>{item.label}</strong>
+                    <p>{item.detail}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </Panel>
         </div>
       </section>
-
-      <button className={styles.plusFloat}>⚡</button>
     </DashboardShell>
   );
 }

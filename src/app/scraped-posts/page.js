@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { DashboardShell, Panel } from "../components";
 import { scrapedPosts } from "../data";
 import styles from "../ui.module.css";
@@ -16,63 +17,89 @@ const dateRangeOptions = [
 ];
 
 export default function ScrapedPostsPage() {
+  const router = useRouter();
+  const [keyword, setKeyword] = useState("");
   const [dateRange, setDateRange] = useState("Last 24 Hours");
+  const [selectedPost, setSelectedPost] = useState(scrapedPosts[0]);
 
   const filtered = useMemo(() => {
-    // UI-only placeholder: keep data static, wire real filtering later.
-    return scrapedPosts;
-  }, [dateRange]);
+    const q = keyword.trim().toLowerCase();
+    return scrapedPosts.filter((post) => !q || [post.title, post.subreddit, post.topic, post.keyword].join(" ").toLowerCase().includes(q));
+  }, [keyword, dateRange]);
+
+  const scrapePosts = () => {
+    const q = keyword.trim().toLowerCase();
+    const match = scrapedPosts.find((post) => [post.title, post.subreddit, post.topic, post.keyword].join(" ").toLowerCase().includes(q));
+    setSelectedPost(match || scrapedPosts[0]);
+  };
+
+  const openDraftComments = (post) => {
+    const params = new URLSearchParams({ source: post.title, subreddit: post.subreddit, keyword: post.keyword });
+    router.push(`/draft-comments?${params.toString()}`);
+  };
 
   return (
     <DashboardShell
       title="Scraped Posts"
-      subtitle="Monitoring 128 active subreddits for relevant engagement triggers."
-      searchPlaceholder="Search posts, subreddits..."
-      actions={<><button className={styles.softButton}>↓ Export CSV</button><button className={styles.actionButton}>◌ Force Sync</button></>}
+      subtitle="Type a keyword, scrape matching posts, then open any row to see the full content and move it into draft comments."
+      searchPlaceholder="Search scraped posts..."
+      actions={<><button className={styles.softButton}>↓ Export CSV</button><button className={styles.actionButton} onClick={scrapePosts}>Scrape</button></>}
     >
       <section className={styles.filterBar}>
         <div className={styles.filterBox}>
+          <label>Keyword</label>
+          <input className={styles.input} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Enter keyword to scrape" />
+        </div>
+
+        <div className={styles.filterBox}>
           <label>Date Range</label>
           <select className={styles.select} value={dateRange} onChange={(e) => setDateRange(e.target.value)}>
-            {dateRangeOptions.map((opt) => (
-              <option key={opt} value={opt}>{opt}</option>
-            ))}
+            {dateRangeOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
           </select>
         </div>
 
-        {["Subreddit", "Min. Relevance"].map((label) => (
-          <div key={label} className={styles.filterBox}>
-            <label>{label}</label>
-            <div className={styles.filterValue}>{label === "Subreddit" ? "All Communities" : "70%"} <span>▾</span></div>
-          </div>
-        ))}
+        <div className={styles.filterBox}>
+          <label>Subreddit</label>
+          <div className={styles.filterValue}>All Communities <span>▾</span></div>
+        </div>
       </section>
 
-      <Panel>
-        <div className={styles.tableHeader}>
-          <span>Date</span><span>Post Title</span><span>Subreddit</span><span>Score</span><span>Topic</span><span>Status</span><span>Action</span>
-        </div>
-        {filtered.map((row) => (
-          <div key={row[2]} className={styles.tableRow}>
-            <div><div className={styles.cellTitle}>{row[0]}</div><div className={styles.tableCellMuted}>{row[1]}</div></div>
-            <div><div className={styles.cellTitle}>{row[2]}</div><div className={styles.tableCellMuted}>reddit.com/r/comments/x7...</div></div>
-            <span className={styles.tag}>{row[3]}</span>
-            <span className={styles.scoreBubble}>{row[4]}</span>
-            <span className={styles.pill}>{row[5]}</span>
-            <span className={row[6] === "Urgent" ? styles.statusUrgent : row[6] === "In Review" ? styles.statusReview : row[6] === "Ignored" ? styles.statusIgnored : styles.statusNew}>{row[6]}</span>
-            <button className={styles.iconButton}>⋮</button>
+      <section className={styles.dashboardSplit}>
+        <Panel title="Scraped Results" right={<span className={styles.note}>{filtered.length} matched</span>}>
+          <div className={styles.tableHeader}>
+            <span>Date</span><span>Post Title</span><span>Subreddit</span><span>Score</span><span>Topic</span><span>Status</span><span>Action</span>
           </div>
-        ))}
-        <div className={styles.bottomBar}>
-          <span className={styles.note}>Showing 1 to 4 of 1,248 entries</span>
-          <div className={styles.pagination}><button className={styles.iconButton}>‹</button><button className={styles.softButton}>1</button><button className={styles.iconButton}>2</button><button className={styles.iconButton}>3</button><button className={styles.iconButton}>32</button><button className={styles.iconButton}>›</button></div>
-        </div>
-      </Panel>
+          {filtered.map((row) => (
+            <button key={row.id} className={`${styles.tableRow} ${selectedPost?.id === row.id ? styles.rowActive : ""}`} onClick={() => setSelectedPost(row)}>
+              <div><div className={styles.cellTitle}>{row.date}</div><div className={styles.tableCellMuted}>{row.time}</div></div>
+              <div><div className={styles.cellTitle}>{row.title}</div><div className={styles.tableCellMuted}>Open to see full post</div></div>
+              <span className={styles.tag}>{row.subreddit}</span>
+              <span className={styles.scoreBubble}>{row.score}</span>
+              <span className={styles.pill}>{row.topic}</span>
+              <span className={row.status === "Urgent" ? styles.statusUrgent : row.status === "In Review" ? styles.statusReview : row.status === "Ignored" ? styles.statusIgnored : styles.statusNew}>{row.status}</span>
+              <span className={styles.actionRowInline}><button className={styles.softButton} onClick={(e) => { e.stopPropagation(); openDraftComments(row); }}>Generate Comment</button></span>
+            </button>
+          ))}
+        </Panel>
 
-      <section className={styles.grid3} style={{ marginTop: 18 }}>
-        <div className={styles.card}><p className={styles.eyebrow}>Trending Community</p><h3>r/ProductHunt</h3><p className={styles.note}>+24% Activity surge</p></div>
-        <div className={styles.card}><p className={styles.eyebrow}>Top Conversion Topic</p><h3>Outreach Automation</h3><p className={styles.note}>14.2% Click-thru rate</p></div>
-        <div className={styles.card}><p className={styles.eyebrow}>Sentiment Index</p><h3>Mostly Positive</h3><p className={styles.note}>Based on 4.2k signals</p></div>
+        <Panel title="Full Post Preview" right={<span className={styles.smallBadge}>Selected</span>}>
+          {selectedPost ? (
+            <div className={styles.postPreview}>
+              <div className={styles.feedMeta}>
+                <span className={styles.tag}>{selectedPost.subreddit}</span>
+                <span>{selectedPost.date}</span>
+                <span>{selectedPost.time}</span>
+                <span className={styles.pill}>{selectedPost.topic}</span>
+              </div>
+              <h4>{selectedPost.title}</h4>
+              {selectedPost.body.map((line) => <p key={line} className={styles.previewText}>{line}</p>)}
+              <div className={styles.previewFooter}>
+                <span className={styles.note}>Keyword: {selectedPost.keyword}</span>
+                <button className={styles.actionButton} onClick={() => openDraftComments(selectedPost)}>Generate Comment</button>
+              </div>
+            </div>
+          ) : null}
+        </Panel>
       </section>
     </DashboardShell>
   );
