@@ -1,12 +1,13 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { DashboardShell, Panel } from "../components";
 import { queueRows } from "../data";
 import styles from "../ui.module.css";
 
 function ApprovalQueueContent() {
+  const router = useRouter();
   const params = useSearchParams();
   const queuedTitle = params.get("title");
   const queuedComment = params.get("comment");
@@ -18,7 +19,18 @@ function ApprovalQueueContent() {
       <div className={styles.tableCellMuted}>{post}</div>
       <div className={styles.queueAgent}>{agent}</div>
       <div className={styles.tableCellMuted}>{scheduled}</div>
-      <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
+      <div className={styles.queueActions}>
+        <button className={styles.softButton}>Remove</button>
+        <button
+          className={styles.actionButton}
+          onClick={() => {
+            const q = new URLSearchParams({ title: queuedTitle || post, comment: queuedComment || post, subreddit });
+            router.push(`/deliver-agents?${q.toString()}`);
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 

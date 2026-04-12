@@ -1,3 +1,7 @@
+"use client";
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { DashboardShell, Panel } from "../components";
 import { agentCards } from "../data";
 import styles from "../ui.module.css";
@@ -10,7 +14,20 @@ const historyRows = [
   ["14:10:05", "Nexus-01", "r/webdev/m9n2k...", "The new Next.js App Router has some learning curve...", "DELIVERED"],
 ];
 
-export default function DeliverAgentsPage() {
+function DeliverAgentsContent() {
+  const params = useSearchParams();
+  const submittedTitle = params.get("title");
+  const submittedComment = params.get("comment");
+  const submittedSubreddit = params.get("subreddit");
+
+  const submittedRow = submittedTitle ? [
+    "just now",
+    "Nexus-01",
+    `${submittedSubreddit || "r/technology"} / queued submission`,
+    submittedComment || submittedTitle,
+    "DELIVERED",
+  ] : null;
+
   return (
     <DashboardShell
       title="Agent Command"
@@ -37,6 +54,15 @@ export default function DeliverAgentsPage() {
         <Panel title="Detailed Execution History" right={<div className={styles.segmentPillGroup}><span className={styles.segmentActive}>All</span><span className={styles.segment}>Failed</span><span className={styles.segment}>Success</span></div>}>
           <div className={styles.historyTable}>
             <div className={styles.queueTableHead}><span>TIMESTAMP</span><span>AGENT</span><span>SOURCE POST</span><span>SUBMISSION PREVIEW</span><span>STATUS</span></div>
+            {submittedRow ? (
+              <div className={`${styles.queueTableRow} ${styles.queueRowSelected}`}>
+                <div className={styles.tableCellMuted}>{submittedRow[0]}</div>
+                <div className={styles.queueAgent}>{submittedRow[1]}</div>
+                <div className={styles.tableCellMuted}>{submittedRow[2]}</div>
+                <div className={styles.tableCellMuted}>{submittedRow[3]}</div>
+                <div className={styles.queueStatus}>{submittedRow[4]}</div>
+              </div>
+            ) : null}
             {historyRows.map((row) => (
               <div key={row[0]} className={styles.queueTableRow}>
                 <div className={styles.tableCellMuted}>{row[0]}</div>
@@ -52,4 +78,8 @@ export default function DeliverAgentsPage() {
       </section>
     </DashboardShell>
   );
+}
+
+export default function DeliverAgentsPage() {
+  return <Suspense fallback={null}><DeliverAgentsContent /></Suspense>;
 }
