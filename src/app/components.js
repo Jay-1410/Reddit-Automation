@@ -10,109 +10,44 @@ function Icon({ type }) {
   switch (type) {
     case "grid": return <svg {...common}><path d="M4 4h7v7H4z" /><path d="M13 4h7v7h-7z" /><path d="M4 13h7v7H4z" /><path d="M13 13h7v7h-7z" /></svg>;
     case "posts": return <svg {...common}><path d="M4 5h16v14H4z" /><path d="M8 9h8" /><path d="M8 13h8" /><path d="M8 17h5" /></svg>;
-    case "trend": return <svg {...common}><path d="M4 16l5-5 4 4 7-7" /><path d="M20 8v5h-5" /></svg>;
     case "comment": return <svg {...common}><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
+    case "trend": return <svg {...common}><path d="M4 16l5-5 4 4 7-7" /><path d="M20 8v5h-5" /></svg>;
     case "draft": return <svg {...common}><path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z" /></svg>;
     case "approval": return <svg {...common}><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>;
     default: return <svg {...common}><circle cx="12" cy="12" r="9" /></svg>;
   }
 }
 
-export function DashboardShell({ title, subtitle, searchPlaceholder, children, actions, brandTitle = "Precision Signal" }) {
+export function DashboardShell({ title, subtitle, searchPlaceholder, children, actions }) {
   const pathname = usePathname();
-
   return (
     <div className={styles.shell}>
       <aside className={styles.sidebar}>
         <div>
           <div className={styles.brandWrap}>
             <div className={styles.brandIcon}>◉</div>
-            <div>
-              <h2>{brandTitle}</h2>
-              <p className={styles.brandSub}>AUTOMATION ENGINE</p>
-            </div>
+            <div><h2>Precision Signal</h2><p className={styles.brandSub}>AUTOMATION ENGINE</p></div>
           </div>
-
-          <nav className={styles.nav}>
-            {navItems.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link key={item.href} href={item.href} className={`${styles.navItem} ${active ? styles.navActive : ""}`}>
-                  <Icon type={item.icon} />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
+          <nav className={styles.nav}>{navItems.map((item) => <Link key={item.href} href={item.href} className={`${styles.navItem} ${pathname === item.href ? styles.navActive : ""}`}><Icon type={item.icon} /><span>{item.label}</span></Link>)}</nav>
         </div>
-
-        <div className={styles.sidebarBottom}>
-          <div className={styles.usageCard}>
-            <div className={styles.usageTop}><span>Usage Limit</span><span>85%</span></div>
-            <div className={styles.progressTrack}><div className={styles.progressFill} style={{ width: "85%" }} /></div>
-            <p className={styles.note}>of monthly signals</p>
-          </div>
-          <button className={styles.actionButton}>Upgrade Plan</button>
-        </div>
+        <div className={styles.sidebarBottom}><div className={styles.usageCard}><div className={styles.usageTop}><span>Usage Limit</span><span>85%</span></div><div className={styles.progressTrack}><div className={styles.progressFill} style={{ width: "85%" }} /></div><p className={styles.note}>of monthly signals</p></div><button className={styles.actionButton}>Upgrade Plan</button></div>
       </aside>
-
       <section className={styles.mainArea}>
         <header className={styles.topbar}>
           <div className={styles.searchBar}>⌕ <span>{searchPlaceholder}</span></div>
-          <div className={styles.topNav}>
-            <button className={styles.tabActive}>Analytics</button>
-            <button className={styles.tab}>Monitoring</button>
-          </div>
-          <div className={styles.topbarRight}>
-            <div className={styles.iconChip}>🔔</div>
-            <div className={styles.iconChip}>?</div>
-            <button className={styles.softButton}>Date Range</button>
-            <button className={styles.actionButton}>New Scrape</button>
-            <div className={styles.profileChip}>A</div>
-          </div>
+          <div className={styles.topNav}><button className={styles.tabActive}>Analytics</button><button className={styles.tab}>Monitoring</button></div>
+          <div className={styles.topbarRight}><div className={styles.iconChip}>🔔</div><div className={styles.iconChip}>?</div><button className={styles.softButton}>Date Range</button><button className={styles.actionButton}>New Scrape</button><div className={styles.profileChip}>A</div></div>
         </header>
-
-        <main className={styles.content}>
-          <section className={styles.pageHeading}>
-            <div>
-              <h1>{title}</h1>
-              <p>{subtitle}</p>
-            </div>
-            {actions ? <div className={styles.pageActions}>{actions}</div> : null}
-          </section>
-          {children}
-        </main>
+        <main className={styles.content}><section className={styles.pageHeading}><div><h1>{title}</h1><p>{subtitle}</p></div>{actions ? <div className={styles.pageActions}>{actions}</div> : null}</section>{children}</main>
       </section>
     </div>
   );
 }
 
-export function StatCard({ eyebrow, title, value, note, footer, accent = "purple" }) {
-  return (
-    <article className={styles.card}>
-      <div className={styles.statHeader}>
-        <div>
-          {eyebrow ? <p className={`${styles.eyebrow} ${styles[accent]}`}>{eyebrow}</p> : null}
-          {title ? <h3>{title}</h3> : null}
-        </div>
-        {footer ? <div>{footer}</div> : null}
-      </div>
-      {value ? <div className={styles.metricValue}>{value}</div> : null}
-      {note ? <p className={styles.note}>{note}</p> : null}
-    </article>
-  );
+export function StatCard({ eyebrow, value, note, accent }) {
+  return <article className={styles.card}><p className={`${styles.eyebrow} ${accent === "high" ? styles.high : accent === "neutral" ? styles.neutral : styles.purple}`}>{eyebrow}</p><div className={styles.metricValue}>{value}</div><p className={styles.note}>{note}</p></article>;
 }
 
-export function Panel({ title, right, children, className = "" }) {
-  return (
-    <section className={`${styles.panel} ${className}`}>
-      {(title || right) ? (
-        <div className={styles.panelHeader}>
-          <h3>{title}</h3>
-          {right ? <div>{right}</div> : null}
-        </div>
-      ) : null}
-      {children}
-    </section>
-  );
+export function Panel({ title, right, children }) {
+  return <section className={styles.panel}>{(title || right) ? <div className={styles.panelHeader}><h3>{title}</h3>{right ? <div>{right}</div> : null}</div> : null}{children}</section>;
 }
