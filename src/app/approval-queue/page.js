@@ -23,23 +23,29 @@ function ApprovalQueueContent() {
 
       {queuedTitle ? (
         <Panel title="Just Added" right={<span className={styles.statusNew}>New</span>}>
-          <div className={styles.queuedPreviewCard}>
-            <div className={styles.feedMeta}>
-              <span className={styles.tag}>{queuedSubreddit || "r/technology"}</span>
-              <span>Queued from Post Scraping</span>
-              <span className={styles.pill}>Assigned Agent: Auto</span>
-              <span className={styles.pill}>Schedule: Pending</span>
-            </div>
-            <h4>{queuedTitle}</h4>
-            <p className={styles.previewText}>{queuedComment || "Comment queued successfully."}</p>
-            <div className={styles.previewFooter}>
-              <span className={styles.note}>Remove or submit after review</span>
-              <div className={styles.queueActions}>
-                <button className={styles.softButton}>Remove</button>
-                <button className={styles.actionButton}>Submit</button>
-              </div>
-            </div>
+          <div className={styles.queueTableHead}><span>Assigned Agent</span><span>Scheduled</span><span>Action</span></div>
+          <div className={styles.queueTableRow}>
+            <div className={styles.queueAgent}>Alpha-1</div>
+            <div className={styles.tableCellMuted}>14:20 (In 2m)</div>
+            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
           </div>
+          <div className={styles.queueTableRow}>
+            <div className={styles.queueAgent}>Beta-4</div>
+            <div className={styles.tableCellMuted}>14:25 (In 7m)</div>
+            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
+          </div>
+          <div className={styles.queueTableRow}>
+            <div className={styles.queueAgent}>Alpha-7</div>
+            <div className={styles.tableCellMuted}>14:32 (In 14m)</div>
+            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
+          </div>
+          {queuedTitle ? (
+            <div className={styles.queueTableRow}>
+              <div className={styles.queueAgent}>Omega-2</div>
+              <div className={styles.tableCellMuted}>14:40 (In 22m)</div>
+              <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
+            </div>
+          ) : null}
         </Panel>
       ) : null}
 
