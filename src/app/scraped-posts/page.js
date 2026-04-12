@@ -152,11 +152,6 @@ export default function ScrapedPostsPage() {
               <textarea className={styles.commentEditor} value={generatedComment} onChange={(e) => setGeneratedComment(e.target.value)} />
             </div>
 
-            <div className={styles.drawerSection}>
-              <p className={styles.eyebrow}>Internal Notes</p>
-              <input className={styles.input} placeholder="Add a label for tracking..." />
-            </div>
-
             <div className={styles.drawerFooter}>
               <button className={styles.softButton} onClick={() => setDrawerOpen(false)}>Discard</button>
               <button className={styles.actionButton} onClick={addToQueue}>Add to Queue</button>
