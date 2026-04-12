@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { DashboardShell, Panel } from "../components";
 import { scrapedPosts } from "../data";
 import styles from "../ui.module.css";
@@ -11,13 +10,16 @@ const subredditOptions = ["/all", "r/technology", "r/saas", "r/marketing"];
 const sortOptions = ["Relevance", "Newest", "Highest Score", "Most Comments"];
 
 export default function ScrapedPostsPage() {
-  const router = useRouter();
   const [keyword, setKeyword] = useState("");
   const [subreddit, setSubreddit] = useState("/all");
   const [sortBy, setSortBy] = useState("Relevance");
   const [timeRange, setTimeRange] = useState("Last 24 Hours");
   const [minimumKarma, setMinimumKarma] = useState("100");
   const [selectedPost, setSelectedPost] = useState(scrapedPosts[0]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [generatedComment, setGeneratedComment] = useState(
+    "That’s a really interesting point. It feels like the real challenge is not just finding signals, but joining them into a workflow that stays human and useful."
+  );
 
   const filtered = useMemo(() => {
     const q = keyword.trim().toLowerCase();
@@ -28,7 +30,20 @@ export default function ScrapedPostsPage() {
     });
   }, [keyword, subreddit, sortBy, timeRange, minimumKarma]);
 
-  const openDraftComments = (post) => router.push(`/draft-comments?source=${encodeURIComponent(post.title)}&subreddit=${encodeURIComponent(post.subreddit)}`);
+  const openDrawer = (post) => {
+    setSelectedPost(post);
+    setDrawerOpen(true);
+  };
+
+  const regenerateComment = () => {
+    setGeneratedComment(
+      "I think the best approach is to keep the response short, specific, and grounded in the actual thread. That usually feels more natural and gets better engagement."
+    );
+  };
+
+  const addToQueue = () => {
+    setDrawerOpen(false);
+  };
 
   return (
     <DashboardShell
@@ -78,7 +93,7 @@ export default function ScrapedPostsPage() {
                   <p>{row.body}</p>
                 </div>
                 <div className={styles.findingActionArea}>
-                  <button className={styles.softButton} onClick={(e) => { e.stopPropagation(); openDraftComments(row); }}>Generate Comment</button>
+                  <button className={styles.softButton} onClick={(e) => { e.stopPropagation(); openDrawer(row); }}>Generate Comment</button>
                   <button className={styles.iconButton} onClick={(e) => e.stopPropagation()}>↗</button>
                 </div>
               </button>
@@ -92,11 +107,63 @@ export default function ScrapedPostsPage() {
               <div className={styles.feedMeta}><span className={styles.tag}>{selectedPost.subreddit}</span><span>{selectedPost.meta}</span></div>
               <h4>{selectedPost.title}</h4>
               <p className={styles.previewText}>{selectedPost.body}</p>
-              <div className={styles.previewFooter}><span className={styles.note}>Open to generate a comment</span><button className={styles.actionButton} onClick={() => openDraftComments(selectedPost)}>Generate Comment</button></div>
+              <div className={styles.previewFooter}><span className={styles.note}>Open to generate a comment</span><button className={styles.actionButton} onClick={() => openDrawer(selectedPost)}>Generate Comment</button></div>
             </div>
           ) : null}
         </Panel>
       </section>
+
+      {drawerOpen ? (
+        <div className={styles.drawerOverlay} onClick={() => setDrawerOpen(false)}>
+          <aside className={styles.drawer} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.drawerHeader}>
+              <div>
+                <p className={styles.eyebrow}>AI Comment Generator</p>
+                <h3>Generate Comment</h3>
+              </div>
+              <button className={styles.iconButton} onClick={() => setDrawerOpen(false)}>✕</button>
+            </div>
+
+            <div className={styles.drawerSection}>
+              <p className={styles.eyebrow}>Source Post</p>
+              <div className={styles.sourceBanner}>
+                <div className={styles.feedMeta}><span className={styles.tag}>{selectedPost.subreddit}</span><span>{selectedPost.meta}</span></div>
+                <h4>{selectedPost.title}</h4>
+                <p className={styles.previewText}>{selectedPost.body}</p>
+              </div>
+            </div>
+
+            <div className={styles.drawerGrid}>
+              <div className={styles.filterBox}>
+                <label>Tone</label>
+                <select className={styles.select}><option>Insightful</option><option>Friendly</option><option>Direct</option></select>
+              </div>
+              <div className={styles.filterBox}>
+                <label>Length</label>
+                <select className={styles.select}><option>Short (1-2 sentences)</option><option>Medium</option><option>Long</option></select>
+              </div>
+            </div>
+
+            <div className={styles.drawerSection}>
+              <div className={styles.drawerSectionHead}>
+                <p className={styles.eyebrow}>Generated Comment</p>
+                <button className={styles.softButton} onClick={regenerateComment}>Regenerate</button>
+              </div>
+              <textarea className={styles.commentEditor} value={generatedComment} onChange={(e) => setGeneratedComment(e.target.value)} />
+            </div>
+
+            <div className={styles.drawerSection}>
+              <p className={styles.eyebrow}>Internal Notes</p>
+              <input className={styles.input} placeholder="Add a label for tracking..." />
+            </div>
+
+            <div className={styles.drawerFooter}>
+              <button className={styles.softButton} onClick={() => setDrawerOpen(false)}>Discard</button>
+              <button className={styles.actionButton} onClick={addToQueue}>Add to Queue</button>
+            </div>
+          </aside>
+        </div>
+      ) : null}
     </DashboardShell>
   );
 }
