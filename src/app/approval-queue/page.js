@@ -12,14 +12,13 @@ function ApprovalQueueContent() {
   const queuedComment = params.get("comment");
   const queuedSubreddit = params.get("subreddit");
 
-  const renderRow = (subreddit, post, agent, scheduled, selected = false, extra = null) => (
+  const renderRow = (subreddit, post, agent, scheduled, selected = false) => (
     <div className={`${styles.queueTableRow} ${selected ? styles.queueRowSelected : ""}`}>
       <div className={styles.queueSub}>{subreddit}</div>
       <div className={styles.tableCellMuted}>{post}</div>
       <div className={styles.queueAgent}>{agent}</div>
       <div className={styles.tableCellMuted}>{scheduled}</div>
       <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-      {extra}
     </div>
   );
 
