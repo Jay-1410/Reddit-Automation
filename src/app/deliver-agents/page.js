@@ -5,42 +5,38 @@ import styles from "../ui.module.css";
 export default function DeliverAgentsPage() {
   return (
     <DashboardShell
-      title="Deliver Agents"
-      subtitle="Assign queued items to one of five agents, keep execution windows staggered, and review submission history."
-      searchPlaceholder="Search agents or history..."
-      actions={<button className={styles.actionButton}>Sync Agent Status</button>}
+      title="AI Agents"
+      subtitle="Five dedicated agents with separate accounts, staggered execution windows, and submission history."
+      searchPlaceholder="Search agents, history, or posts..."
+      actions={<button className={styles.actionButton}>Sync Status</button>}
     >
-      <section className={styles.metricGrid}>
+      <section className={styles.agentGrid}>
         {agents.map((agent) => (
-          <Panel key={agent.name} title={agent.name} right={<span className={styles.smallBadge}>{agent.status}</span>}>
-            <div className={styles.tableList}>
-              <div className={styles.filterValue}>Reddit Account <span className={styles.pill}>{agent.reddit}</span></div>
-              <div className={styles.filterValue}>Next Window <span className={styles.pill}>{agent.window}</span></div>
-              <div className={styles.filterValue}>Assigned Queue <span className={styles.tag}>{agent.assigned}</span></div>
-              <div className={styles.filterValue}>Item Type <span className={styles.pill}>{agent.item}</span></div>
-            </div>
-          </Panel>
+          <article key={agent.name} className={styles.agentCard}>
+            <div className={styles.agentTop}><div><h3>{agent.name}</h3><p className={styles.note}>{agent.reddit}</p></div><span className={styles.statusNew}>{agent.status}</span></div>
+            <div className={styles.agentMetaGrid}><div><p className={styles.eyebrow}>Window</p><div className={styles.cellTitle}>{agent.window}</div></div><div><p className={styles.eyebrow}>Queue</p><div className={styles.cellTitle}>{agent.assigned}</div></div><div><p className={styles.eyebrow}>Type</p><div className={styles.cellTitle}>{agent.item}</div></div></div>
+          </article>
         ))}
       </section>
 
-      <section className={styles.dashboardSplit}>
+      <section className={styles.dashboardTwoCol}>
         <Panel title="Assignment Board">
-          <div className={styles.tableHeader}><span>Agent</span><span>Account</span><span>Window</span><span>Assigned</span><span>Status</span></div>
+          <div className={styles.queueTableHead}><span>Agent</span><span>Account</span><span>Window</span><span>Assigned</span><span>Status</span></div>
           {agents.map((agent) => (
-            <div key={agent.name} className={styles.approvalRow}>
-              <div className={styles.cellTitle}>{agent.name}</div>
+            <div key={agent.name} className={styles.queueTableRow}>
+              <div className={styles.queueAgent}>{agent.name}</div>
               <div className={styles.tableCellMuted}>{agent.reddit}</div>
               <div className={styles.tableCellMuted}>{agent.window}</div>
               <div className={styles.cellTitle}>{agent.assigned}</div>
-              <div className={styles.safe}>{agent.status}</div>
+              <div className={styles.statusNew}>{agent.status}</div>
             </div>
           ))}
         </Panel>
 
-        <Panel title="Submission History">
-          <div className={styles.stackColumn}>
+        <Panel title="Execution History">
+          <div className={styles.feedList}>
             {agents.map((agent) => (
-              <div key={agent.name} className={styles.feedCard}>
+              <div key={agent.name} className={styles.historyCard}>
                 <div className={styles.feedMeta}><span className={styles.tag}>{agent.name}</span><span>{agent.window}</span></div>
                 <p className={styles.note}>Last actions: {agent.history.join(" • ")}</p>
               </div>

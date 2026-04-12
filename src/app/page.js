@@ -5,10 +5,9 @@ import styles from "./ui.module.css";
 export default function HomePage() {
   return (
     <DashboardShell
-      title="Campaign Overview"
-      subtitle="A focused workspace for monitoring posts, generating drafts, and reviewing approvals."
-      searchPlaceholder="Search campaigns, posts, or communities..."
-      actions={<><button className={styles.softButton}>Export</button><button className={styles.actionButton}>New Campaign</button></>}
+      title="Analytics"
+      subtitle="Track keyword coverage, scraped volume, generated comments, and queue health across the workspace."
+      searchPlaceholder="Search signals, agents, or subreddits..."
     >
       <section className={styles.metricGrid}>
         {dashboardMetrics.map((item) => (
@@ -17,53 +16,64 @@ export default function HomePage() {
       </section>
 
       <section className={styles.dashboardSplit}>
-        <Panel title="Priority Feed" right={<span className={styles.note}>Live ranking</span>}>
-          <div className={styles.feedList}>
-            {dashboardPosts.map((post) => (
-              <article key={post.id} className={styles.feedCard}>
-                <div className={styles.feedMeta}>
-                  <span className={styles.tag}>{post.subreddit}</span>
-                  <span>{post.author}</span>
-                  <span>{post.age}</span>
-                  <span className={styles.pill}>{post.urgency}</span>
-                </div>
-                <h4>{post.title}</h4>
-                <p>{post.body}</p>
-                <div className={styles.feedFooter}>
-                  <div className={styles.inlineMeta}>
-                    <span>♡ {post.likes}</span>
-                    <span>💬 {post.comments}</span>
-                  </div>
-                  <button className={styles.softButton}>Generate Draft</button>
-                </div>
-              </article>
-            ))}
+        <Panel title="Network Performance" right={<div className={styles.segmentPillGroup}><span className={styles.segmentActive}>Posts</span><span className={styles.segment}>Comments</span></div>}>
+          <div className={styles.chartCard}>
+            <div className={styles.chartLine} />
           </div>
         </Panel>
 
         <div className={styles.stackColumn}>
-          <Panel title="Pipeline Status">
-            <div className={styles.miniPills}>
-              <div className={styles.filterValue}>Scraping <span className={styles.safe}>On</span></div>
-              <div className={styles.filterValue}>Drafting <span className={styles.pill}>18 ready</span></div>
-              <div className={styles.filterValue}>Review <span className={styles.pill}>7 pending</span></div>
+          <Panel title="Top Keyword">
+            <div className={styles.miniCardEmphasis}>
+              <div>
+                <p className={styles.eyebrow}>Trending now</p>
+                <h3>AI Automation</h3>
+                <p className={styles.note}>248 matches today</p>
+              </div>
             </div>
           </Panel>
 
-          <Panel title="Recent Activity">
-            <div className={styles.tableList}>
-              {dashboardTimeline.map((item) => (
-                <div key={item.label} className={styles.timelineItem}>
-                  <span className={`${styles.dot} ${styles[item.tone]}`} />
-                  <div>
-                    <strong>{item.label}</strong>
-                    <p>{item.detail}</p>
-                  </div>
-                </div>
-              ))}
+          <Panel title="Best Agent">
+            <div className={styles.miniCardEmphasis}>
+              <div>
+                <p className={styles.eyebrow}>Highest success</p>
+                <h3>Agent Alpha-7</h3>
+                <p className={styles.note}>98% positive sentiment score</p>
+              </div>
             </div>
           </Panel>
         </div>
+      </section>
+
+      <section className={styles.dashboardTwoCol}>
+        <Panel title="Live Signal Feed">
+          <div className={styles.feedList}>
+            {dashboardTimeline.map((item) => (
+              <div key={item.label} className={styles.signalRow}>
+                <span className={`${styles.dot} ${styles[item.tone]}`} />
+                <div>
+                  <strong>{item.label}</strong>
+                  <p>{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Panel>
+
+        <Panel title="Queue Snapshot" right={<span className={styles.note}>View Full Queue</span>}>
+          <div className={styles.queueTable}>
+            {dashboardPosts.map((post) => (
+              <div key={post.id} className={styles.queueRow}>
+                <div className={styles.queueSub}>{post.subreddit}</div>
+                <div>
+                  <div className={styles.queueTitle}>{post.title}</div>
+                  <div className={styles.tableCellMuted}>{post.author} • {post.age}</div>
+                </div>
+                <div className={styles.queueStatus}>{post.urgency}</div>
+              </div>
+            ))}
+          </div>
+        </Panel>
       </section>
     </DashboardShell>
   );
