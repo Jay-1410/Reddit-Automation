@@ -50,9 +50,19 @@ export default function ScrapedPostsPage() {
     router.push(`/approval-queue?${params.toString()}`);
   };
 
+  const scrape = () => {
+    if (keyword.trim()) {
+      const match = filtered[0] || scrapedPosts[0];
+      setSelectedPost(match);
+    }
+  };
+
   return (
-    <DashboardShell title="Post Scraping" subtitle="Search by keyword and inspect approved-source findings in a split view." searchPlaceholder="Search keywords..." actions={<button className={styles.actionButton}>Fetch Sources</button>}>
-      <section className={styles.searchRow}><input className={styles.input} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Search keywords (e.g. SaaS growth, UI design trends)..." /></section>
+    <DashboardShell title="Post Scraping" subtitle="Keyword-based approved-source findings in a split view." searchPlaceholder="Keyword input..." actions={<button className={styles.actionButton} onClick={scrape}>Scrape</button>}>
+      <section className={styles.keywordBar}>
+        <input className={styles.keywordInput} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Enter keyword and scrape posts..." />
+        <button className={styles.actionButton} onClick={scrape}>Scrape</button>
+      </section>
       <section className={styles.filterBar}><div className={styles.filterBox}><label>Subreddit</label><select className={styles.select} value={subreddit} onChange={(e) => setSubreddit(e.target.value)}>{subredditOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Sort By</label><select className={styles.select} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>{sortOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Time Range</label><select className={styles.select} value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>{timeRangeOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Minimum Karma</label><input className={styles.input} value={minimumKarma} onChange={(e) => setMinimumKarma(e.target.value)} /></div></section>
 
       <section className={styles.dashboardSplit}>
@@ -68,7 +78,7 @@ export default function ScrapedPostsPage() {
           </div>
         </Panel>
 
-        <Panel title="Selected Post"><div className={styles.selectedPostCard}><div className={styles.feedMeta}><span className={styles.tag}>{selectedPost.subreddit}</span><span>{selectedPost.meta}</span><span>{selectedPost.source}</span></div><h4>{selectedPost.title}</h4><p className={styles.previewText}>{selectedPost.body}</p><div className={styles.previewFooter}><span className={styles.note}>Open to generate a comment</span><button className={styles.actionButton}>Generate Comment</button></div></div></Panel>
+        <Panel title="Selected Post"><div className={styles.selectedPostCard}><div className={styles.feedMeta}><span className={styles.tag}>{selectedPost.subreddit}</span><span>{selectedPost.meta}</span><span>{selectedPost.source}</span></div><h4>{selectedPost.title}</h4><p className={styles.previewText}>{selectedPost.body}</p><div className={styles.previewFooter}><span className={styles.note}>Open to generate a comment</span><button className={styles.actionButton} onClick={() => openDrawer(selectedPost)}>Generate Comment</button></div></div></Panel>
       </section>
 
       {drawerOpen ? (
