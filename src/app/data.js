@@ -1,7 +1,6 @@
 export const navItems = [
   { label: "Home", href: "/", icon: "grid" },
   { label: "Post Scraping", href: "/scraped-posts", icon: "posts" },
-  { label: "Draft Comments", href: "/draft-comments", icon: "draft" },
   { label: "Comment Queue", href: "/approval-queue", icon: "comment" },
   { label: "AI Agents", href: "/deliver-agents", icon: "trend" },
 ];
