@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DashboardShell, Panel } from "../components";
-import { scrapedPosts, sourceStatuses } from "../data";
+import { scrapedPosts } from "../data";
 import styles from "../ui.module.css";
 
 const timeRangeOptions = ["Last 1 Hour", "Last 3 Hours", "Last 6 Hours", "Last 9 Hours", "Last 12 Hours", "Last 24 Hours", "This Week"];
@@ -52,7 +52,6 @@ export default function ScrapedPostsPage() {
 
   return (
     <DashboardShell title="Post Scraping" subtitle="Search by keyword and inspect approved-source findings in a split view." searchPlaceholder="Search keywords..." actions={<button className={styles.actionButton}>Fetch Sources</button>}>
-      <section className={styles.sourceHealthWrap}>{sourceStatuses.map((item) => <div key={item[0]} className={styles.sourceHealthCard}><div className={styles.queueTitle}>{item[0]}</div><div className={styles.tableCellMuted}>{item[2]}</div><span className={item[1] === "Connected" ? styles.statusNew : styles.statusReview}>{item[1]}</span></div>)}</section>
       <section className={styles.searchRow}><input className={styles.input} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Search keywords (e.g. SaaS growth, UI design trends)..." /></section>
       <section className={styles.filterBar}><div className={styles.filterBox}><label>Subreddit</label><select className={styles.select} value={subreddit} onChange={(e) => setSubreddit(e.target.value)}>{subredditOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Sort By</label><select className={styles.select} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>{sortOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Time Range</label><select className={styles.select} value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>{timeRangeOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Minimum Karma</label><input className={styles.input} value={minimumKarma} onChange={(e) => setMinimumKarma(e.target.value)} /></div></section>
 
