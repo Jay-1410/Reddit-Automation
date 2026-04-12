@@ -31,10 +31,23 @@ export const queueRows = [
   ["r/worldnews", "Breaking: New ...", "Omega-2", "14:40 (In 22m)", ""],
 ];
 
+export const sourceStatuses = [
+  ["Reddit API", "Connected", "Last sync 2m ago"],
+  ["RSS Feed", "Connected", "Last sync 8m ago"],
+  ["CSV Import", "Ready", "Awaiting upload"],
+];
+
+export const sourceRules = [
+  ["Keywords", "automation, SaaS, growth"],
+  ["Subreddits", "r/technology, r/saas, r/marketing"],
+  ["Minimum Karma", "100"],
+  ["Time Range", "Last 24 Hours"],
+];
+
 export const scrapedPosts = [
-  { id: "sp1", subreddit: "r/technology", meta: "posted by u/tech_titan • 4 hours ago", title: "Apple’s new vision for spatial computing is finally here, but is the market ready for a $3k headset?", body: "The latest release from Cupertino has sparked massive debates across multiple subreddits. We’re seeing a lot of mixed sentiment regarding the pricing vs. utility for enterprise users...", score: "1.2k" },
-  { id: "sp2", subreddit: "r/saas", meta: "posted by u/bootstrapped_guy • 8 hours ago", title: "How we grew our Micro-SaaS to $10k MRR using only Reddit communities without getting banned.", body: "Authenticity is key. We spent months just contributing to discussions before even mentioning our product. Here is the step-by-step breakdown of our strategy...", score: "842" },
-  { id: "sp3", subreddit: "r/marketing", meta: "posted by u/brand_guru • 12 hours ago", title: "The death of the cookie: Why first-party data is the only thing that will save your ad budget in 2024.", body: "Most marketers are still sleeping on the impending changes to tracking. If you aren’t building a direct community now, you’re going to pay 3x for acquisition by Q3...", score: "3.5k" },
+  { id: "sp1", subreddit: "r/technology", meta: "posted by u/tech_titan • 4 hours ago", title: "Apple’s new vision for spatial computing is finally here, but is the market ready for a $3k headset?", body: "The latest release from Cupertino has sparked massive debates across multiple subreddits. We’re seeing a lot of mixed sentiment regarding the pricing vs. utility for enterprise users...", score: "1.2k", source: "Reddit API" },
+  { id: "sp2", subreddit: "r/saas", meta: "posted by u/bootstrapped_guy • 8 hours ago", title: "How we grew our Micro-SaaS to $10k MRR using only Reddit communities without getting banned.", body: "Authenticity is key. We spent months just contributing to discussions before even mentioning our product. Here is the step-by-step breakdown of our strategy...", score: "842", source: "RSS Feed" },
+  { id: "sp3", subreddit: "r/marketing", meta: "posted by u/brand_guru • 12 hours ago", title: "The death of the cookie: Why first-party data is the only thing that will save your ad budget in 2024.", body: "Most marketers are still sleeping on the impending changes to tracking. If you aren’t building a direct community now, you’re going to pay 3x for acquisition by Q3...", score: "3.5k", source: "CSV Import" },
 ];
 
 export const queueItems = [
