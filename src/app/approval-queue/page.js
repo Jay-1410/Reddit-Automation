@@ -12,6 +12,17 @@ function ApprovalQueueContent() {
   const queuedComment = params.get("comment");
   const queuedSubreddit = params.get("subreddit");
 
+  const renderRow = (subreddit, post, agent, scheduled, selected = false, extra = null) => (
+    <div className={`${styles.queueTableRow} ${selected ? styles.queueRowSelected : ""}`}>
+      <div className={styles.queueSub}>{subreddit}</div>
+      <div className={styles.tableCellMuted}>{post}</div>
+      <div className={styles.queueAgent}>{agent}</div>
+      <div className={styles.tableCellMuted}>{scheduled}</div>
+      <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
+      {extra}
+    </div>
+  );
+
   return (
     <DashboardShell title="Comment Queue" subtitle="Review queued comments and posts, then remove or submit them into the delivery workflow." searchPlaceholder="Search queue or agents..." actions={<><button className={styles.softButton}>Filters</button><button className={styles.actionButton}>Submit Selected</button></>}>
       <section className={styles.metricGrid}>
@@ -21,32 +32,10 @@ function ApprovalQueueContent() {
         <div className={styles.card}><p className={styles.eyebrow}>Flagged</p><div className={styles.metricValue}>13</div><p className={styles.note}>Needs manual review</p></div>
       </section>
 
-      {queuedTitle ? (
-        <Panel title="Just Added" right={<span className={styles.statusNew}>New</span>}>
-          <div className={`${styles.queueTableRow} ${styles.queueRowSelected}`}>
-            <div className={styles.queueSub}>{queuedSubreddit || "r/technology"}</div>
-            <div>
-              <div className={styles.queueTitle}>{queuedTitle}</div>
-              <div className={styles.tableCellMuted}>{queuedComment || "Comment queued successfully."}</div>
-            </div>
-            <div className={styles.queueAgent}>Alpha-1</div>
-            <div className={styles.tableCellMuted}>14:20 (In 2m)</div>
-            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-          </div>
-        </Panel>
-      ) : null}
-
       <Panel title="Queue Snapshot" right={<span className={styles.note}>Review and submit</span>}>
         <div className={styles.queueTableHead}><span>Subreddit</span><span>Trigger Post</span><span>Assigned Agent</span><span>Scheduled</span><span>Action</span></div>
-        {queueRows.map((row) => (
-          <div key={row[0]} className={styles.queueTableRow}>
-            <div className={styles.queueSub}>{row[0]}</div>
-            <div className={styles.tableCellMuted}>{row[1]}</div>
-            <div className={styles.queueAgent}>{row[2]}</div>
-            <div className={styles.tableCellMuted}>{row[3]}</div>
-            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-          </div>
-        ))}
+        {queuedTitle ? renderRow(queuedSubreddit || "r/technology", `${queuedTitle} • ${queuedComment || "Queued from Post Scraping"}`, "Alpha-1", "14:20 (In 2m)", true) : null}
+        {queueRows.map((row) => renderRow(row[0], row[1], row[2], row[3]))}
       </Panel>
     </DashboardShell>
   );
