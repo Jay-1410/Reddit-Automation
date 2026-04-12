@@ -1,10 +1,10 @@
 import { DashboardShell, Panel, StatCard } from "./components";
-import { activityFeed, dashboardStats, queueRows } from "./data";
+import { activityFeed, dashboardStats, queueRows, sourceRules, sourceStatuses } from "./data";
 import styles from "./ui.module.css";
 
 export default function HomePage() {
   return (
-    <DashboardShell title="Analytics" subtitle="Global scrape and generation rates across the last 24 hours." searchPlaceholder="Quick search...">
+    <DashboardShell title="Analytics" subtitle="Global source and generation rates across the last 24 hours." searchPlaceholder="Quick search...">
       <section className={styles.metricGrid}>
         {dashboardStats.slice(0, 4).map((item) => <StatCard key={item.label} eyebrow={item.label} value={item.value} note={item.note} accent={item.accent === "High" ? "high" : "neutral"} />)}
       </section>
@@ -13,11 +13,13 @@ export default function HomePage() {
       </section>
 
       <section className={styles.dashboardSplit}>
-        <Panel title="Network Performance" right={<div className={styles.segmentPillGroup}><span className={styles.segmentActive}>Posts</span><span className={styles.segment}>Comments</span></div>}>
-          <div className={styles.chartCard}><div className={styles.chartLine} /></div>
+        <Panel title="Source Health" right={<span className={styles.note}>Approved sources only</span>}>
+          <div className={styles.sourceHealthList}>
+            {sourceStatuses.map((item) => <div key={item[0]} className={styles.sourceHealthRow}><div><div className={styles.queueTitle}>{item[0]}</div><div className={styles.tableCellMuted}>{item[2]}</div></div><span className={item[1] === "Connected" ? styles.statusNew : styles.statusReview}>{item[1]}</span></div>)}
+          </div>
         </Panel>
         <div className={styles.stackColumn}>
-          <Panel title="Top Keyword"><div className={styles.miniCardEmphasis}><div><p className={styles.eyebrow}>Top Keyword</p><h3>AI Automation</h3><p className={styles.note}>248 matches today</p></div></div></Panel>
+          <Panel title="Source Rules"><div className={styles.tableList}>{sourceRules.map((item) => <div key={item[0]} className={styles.filterValue}><span>{item[0]}</span><span className={styles.pill}>{item[1]}</span></div>)}</div></Panel>
           <Panel title="Best Agent"><div className={styles.miniCardEmphasis}><div><p className={styles.eyebrow}>Best Agent</p><h3>Agent Alpha-7</h3><p className={styles.note}>98% positive sentiment score</p></div></div></Panel>
         </div>
       </section>
