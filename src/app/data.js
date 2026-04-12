@@ -3,9 +3,8 @@ export const navItems = [
   { label: "Post Scraping", href: "/scraped-posts", icon: "posts" },
   { label: "Comment Queue", href: "/approval-queue", icon: "comment" },
   { label: "AI Agents", href: "/deliver-agents", icon: "trend" },
-  { label: "History", href: "/draft-comments", icon: "draft" },
-  { label: "Accounts", href: "/draft-posts", icon: "approval" },
-  { label: "Settings", href: "/", icon: "grid" },
+  { label: "Draft Comments", href: "/draft-comments", icon: "draft" },
+  { label: "Draft Posts", href: "/draft-posts", icon: "approval" },
 ];
 
 export const dashboardStats = [
