@@ -279,3 +279,68 @@
   .pageActions > * { flex: 1; }
   .bottomBar { flex-direction: column; align-items: flex-start; }
 }
+
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 4, 12, 0.58);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(460px, 100vw);
+  height: 100%;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(19, 24, 40, 0.98), rgba(10, 14, 26, 0.98));
+  border-left: 1px solid rgba(168, 182, 214, 0.10);
+  overflow-y: auto;
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.35);
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.drawerHeader h3 {
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.drawerSection {
+  margin-bottom: 18px;
+}
+
+.drawerSectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.drawerGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.drawerFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+}
+
+@media (max-width: 700px) {
+  .drawer { width: 100vw; }
+  .drawerGrid { grid-template-columns: 1fr; }
+}
