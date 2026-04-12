@@ -61,7 +61,7 @@ export default function ScrapedPostsPage() {
     <DashboardShell title="Post Scraping" subtitle="Keyword-based approved-source findings in a split view." searchPlaceholder="Keyword input..." actions={<button className={styles.actionButton} onClick={scrape}>Scrape</button>}>
       <section className={styles.keywordBar}>
         <input className={styles.keywordInput} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Enter keyword and scrape posts..." />
-        <button className={styles.actionButton} onClick={scrape}>Scrape</button>
+        <button className={styles.keywordScrapeButton} onClick={scrape}>Scrape</button>
       </section>
       <section className={styles.filterBar}><div className={styles.filterBox}><label>Subreddit</label><select className={styles.select} value={subreddit} onChange={(e) => setSubreddit(e.target.value)}>{subredditOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Sort By</label><select className={styles.select} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>{sortOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Time Range</label><select className={styles.select} value={timeRange} onChange={(e) => setTimeRange(e.target.value)}>{timeRangeOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}</select></div><div className={styles.filterBox}><label>Minimum Karma</label><input className={styles.input} value={minimumKarma} onChange={(e) => setMinimumKarma(e.target.value)} /></div></section>
 

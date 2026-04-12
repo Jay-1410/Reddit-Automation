@@ -196,6 +196,7 @@
 .keywordBar { display: flex; gap: 10px; margin-bottom: 14px; }
 .keywordInput { flex: 1; min-height: 40px; padding: 0 14px; border-radius: 14px; border: 1px solid rgba(175, 186, 219, 0.12); background: rgba(255, 255, 255, 0.04); color: #eef3ff; outline: none; font-size: 13px; }
 .keywordInput::placeholder { color: rgba(169, 183, 211, 0.76); }
+.keywordScrapeButton { min-width: 132px; height: 40px; border: 0; border-radius: 14px; background: linear-gradient(135deg, #ff8f73, #ff6f4a); color: #fff; font-weight: 700; }
 .filterBar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
 .filterBox label { display: block; margin-bottom: 6px; color: #dce4ff; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
 .input,
