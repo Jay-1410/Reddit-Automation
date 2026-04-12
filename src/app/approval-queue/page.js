@@ -23,29 +23,16 @@ function ApprovalQueueContent() {
 
       {queuedTitle ? (
         <Panel title="Just Added" right={<span className={styles.statusNew}>New</span>}>
-          <div className={styles.queueTableHead}><span>Assigned Agent</span><span>Scheduled</span><span>Action</span></div>
-          <div className={styles.queueTableRow}>
+          <div className={`${styles.queueTableRow} ${styles.queueRowSelected}`}>
+            <div className={styles.queueSub}>{queuedSubreddit || "r/technology"}</div>
+            <div>
+              <div className={styles.queueTitle}>{queuedTitle}</div>
+              <div className={styles.tableCellMuted}>{queuedComment || "Comment queued successfully."}</div>
+            </div>
             <div className={styles.queueAgent}>Alpha-1</div>
             <div className={styles.tableCellMuted}>14:20 (In 2m)</div>
             <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
           </div>
-          <div className={styles.queueTableRow}>
-            <div className={styles.queueAgent}>Beta-4</div>
-            <div className={styles.tableCellMuted}>14:25 (In 7m)</div>
-            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-          </div>
-          <div className={styles.queueTableRow}>
-            <div className={styles.queueAgent}>Alpha-7</div>
-            <div className={styles.tableCellMuted}>14:32 (In 14m)</div>
-            <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-          </div>
-          {queuedTitle ? (
-            <div className={styles.queueTableRow}>
-              <div className={styles.queueAgent}>Omega-2</div>
-              <div className={styles.tableCellMuted}>14:40 (In 22m)</div>
-              <div className={styles.queueActions}><button className={styles.softButton}>Remove</button><button className={styles.actionButton}>Submit</button></div>
-            </div>
-          ) : null}
         </Panel>
       ) : null}
 
