@@ -39,7 +39,7 @@
   height: 40px;
   background: linear-gradient(135deg, #8a70ff 0%, #3394ff 100%);
   box-shadow: 0 12px 28px rgba(73, 117, 255, 0.28);
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .brandWrap h2 { font-size: 17px; font-weight: 700; line-height: 1.1; }
@@ -65,7 +65,7 @@
 .iconButton,
 .tab,
 .tabActive {
-  height: 38px;
+  height: 34px;
   border: 0;
   border-radius: 12px;
   padding: 0 14px;
@@ -115,7 +115,7 @@
 .profileChip { background: linear-gradient(135deg, #5f7cff, #57b5ff); color: #fff; font-weight: 700; }
 
 .content { padding: 24px; width: 100%; max-width: none; }
-.pageHeading { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 16px; }
+.pageHeading { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 14px; }
 .pageHeading h1 { font-size: clamp(1.8rem, 2.5vw, 2.5rem); line-height: 1.02; letter-spacing: -0.05em; }
 .pageHeading p { max-width: 760px; margin-top: 8px; color: #b8c3df; font-size: 13px; line-height: 1.55; }
 .pageActions { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -134,7 +134,7 @@
 .card,
 .panel,
 .emptyState,
-.bottomBar { padding: 16px; }
+.bottomBar { padding: 14px; }
 .metricGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
 .metricValue { margin-top: 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.04em; }
 .eyebrow { margin-bottom: 8px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -206,7 +206,7 @@
 .select option { color: #0a0f1f; }
 
 .findingsList { display: flex; flex-direction: column; gap: 14px; }
-.findingCard { width: 100%; display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.03); color: inherit; text-align: left; }
+.findingCard { width: 100%; display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px; border-radius: 18px; background: rgba(255,255,255,0.03); color: inherit; text-align: left; }
 .findingActive { border-color: rgba(255, 155, 131, 0.25); box-shadow: 0 0 0 1px rgba(255, 155, 131, 0.08) inset; }
 .voteRail { width: 56px; min-height: 92px; border-radius: 16px; background: rgba(0,0,0,0.28); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #b5bfdc; }
 .findingBody h4 { font-size: 18px; line-height: 1.35; margin: 8px 0; }
@@ -237,12 +237,12 @@
 .queueTitle { color: #fff; font-weight: 600; }
 
 .agentGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
-.agentCard { border-radius: 18px; padding: 16px; }
+.agentCard { border-radius: 18px; padding: 14px; }
 .agentTop { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
 .agentTop h3 { font-size: 16px; }
 .agentMetaGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .historyCard { border-radius: 16px; padding: 14px; }
-.sourceBanner { border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+.sourceBanner { border-radius: 16px; padding: 14px; margin-bottom: 14px; }
 .commentCard { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.35fr) auto; gap: 14px; align-items: start; padding: 18px; border-radius: 18px; }
 .commentPrompt { font-size: 16px; line-height: 1.45; margin: 8px 0; }
 .commentBody { font-size: 13px; line-height: 1.65; color: #c8d1eb; }
@@ -349,10 +349,10 @@
   .drawerGrid { grid-template-columns: 1fr; }
 }
 
-.agentGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
+.agentGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; align-items: stretch; }
 .agentThemeCard {
   position: relative;
-  min-height: 340px;
+  min-height: 300px;
   padding: 18px;
   border-radius: 22px;
   border: 1px solid rgba(170, 183, 216, 0.10);
@@ -360,10 +360,10 @@
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.30);
 }
 .agentThemeTop { display: flex; justify-content: space-between; align-items: flex-start; }
-.agentPortraitWrap { position: relative; width: 78px; height: 78px; }
+.agentPortraitWrap { position: relative; width: 68px; height: 68px; }
 .agentPortrait {
-  width: 78px;
-  height: 78px;
+  width: 68px;
+  height: 68px;
   border-radius: 14px;
   background: radial-gradient(circle at 30% 20%, rgba(77, 255, 239, 0.55), rgba(10, 15, 24, 0.95) 60%), linear-gradient(180deg, #0b1524, #08111c);
   color: #8be7ff;
@@ -387,9 +387,9 @@
 .agentDotBlue { background: #9bbdf7; }
 .agentDotGray { background: #666; }
 .agentThemeMenu { color: rgba(255,255,255,0.45); font-size: 18px; line-height: 1; }
-.agentThemeName { margin-top: 18px; font-size: 18px; line-height: 1.1; color: #f1f2f5; }
+.agentThemeName { margin-top: 14px; font-size: 16px; line-height: 1.1; color: #f1f2f5; }
 .agentThemeHandle { margin-top: 6px; color: #ffb7a3; font-weight: 600; }
-.agentThemeDivider { height: 1px; margin: 18px 0 16px; background: rgba(255,255,255,0.08); }
+.agentThemeDivider { height: 1px; margin: 14px 0 12px; background: rgba(255,255,255,0.08); }
 .agentThemeMetaRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .agentThemeStatus { color: #ff7a51; font-weight: 800; letter-spacing: 0.04em; }
 .agentThemeMetric { color: #aeb4c2; font-weight: 600; }
@@ -408,7 +408,7 @@
   font-weight: 700;
 }
 .agentThemeAddCard {
-  min-height: 340px;
+  min-height: 300px;
   border-radius: 22px;
   border: 1px dashed rgba(170, 183, 216, 0.18);
   background: rgba(255,255,255,0.02);
