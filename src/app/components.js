@@ -33,11 +33,6 @@ export function DashboardShell({ title, subtitle, searchPlaceholder, children, a
         <div className={styles.sidebarBottom}><div className={styles.usageCard}><div className={styles.usageTop}><span>Usage Limit</span><span>85%</span></div><div className={styles.progressTrack}><div className={styles.progressFill} style={{ width: "85%" }} /></div><p className={styles.note}>of monthly signals</p></div><button className={styles.actionButton}>Upgrade Plan</button></div>
       </aside>
       <section className={styles.mainArea}>
-        <header className={styles.topbar}>
-          <div className={styles.searchBar}>⌕ <span>{searchPlaceholder}</span></div>
-          <div className={styles.topNav}><button className={styles.tabActive}>Analytics</button><button className={styles.tab}>Monitoring</button></div>
-          <div className={styles.topbarRight}><div className={styles.iconChip}>🔔</div><div className={styles.iconChip}>?</div><button className={styles.softButton}>Date Range</button><button className={styles.actionButton}>New Scrape</button><div className={styles.profileChip}>A</div></div>
-        </header>
         <main className={styles.content}><section className={styles.pageHeading}><div><h1>{title}</h1><p>{subtitle}</p></div>{actions ? <div className={styles.pageActions}>{actions}</div> : null}</section>{children}</main>
       </section>
     </div>
