@@ -115,7 +115,7 @@
 .profileChip { background: linear-gradient(135deg, #5f7cff, #57b5ff); color: #fff; font-weight: 700; }
 
 .content { padding: 24px; width: 100%; max-width: none; }
-.pageHeading { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 18px; }
+.pageHeading { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 16px; }
 .pageHeading h1 { font-size: clamp(1.8rem, 2.5vw, 2.5rem); line-height: 1.02; letter-spacing: -0.05em; }
 .pageHeading p { max-width: 760px; margin-top: 8px; color: #b8c3df; font-size: 13px; line-height: 1.55; }
 .pageActions { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -134,7 +134,7 @@
 .card,
 .panel,
 .emptyState,
-.bottomBar { padding: 18px; }
+.bottomBar { padding: 16px; }
 .metricGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
 .metricValue { margin-top: 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.04em; }
 .eyebrow { margin-bottom: 8px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -349,10 +349,10 @@
   .drawerGrid { grid-template-columns: 1fr; }
 }
 
-.agentGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-bottom: 18px; }
+.agentGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 18px; }
 .agentThemeCard {
   position: relative;
-  min-height: 420px;
+  min-height: 340px;
   padding: 18px;
   border-radius: 22px;
   border: 1px solid rgba(170, 183, 216, 0.10);
@@ -360,10 +360,10 @@
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.30);
 }
 .agentThemeTop { display: flex; justify-content: space-between; align-items: flex-start; }
-.agentPortraitWrap { position: relative; width: 96px; height: 96px; }
+.agentPortraitWrap { position: relative; width: 78px; height: 78px; }
 .agentPortrait {
-  width: 96px;
-  height: 96px;
+  width: 78px;
+  height: 78px;
   border-radius: 14px;
   background: radial-gradient(circle at 30% 20%, rgba(77, 255, 239, 0.55), rgba(10, 15, 24, 0.95) 60%), linear-gradient(180deg, #0b1524, #08111c);
   color: #8be7ff;
@@ -371,7 +371,7 @@
   place-items: center;
   font-weight: 700;
   letter-spacing: 0.08em;
-  font-size: 20px;
+  font-size: 17px;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 8px 18px rgba(0,0,0,0.35);
 }
 .agentStatusDot {
@@ -387,9 +387,9 @@
 .agentDotBlue { background: #9bbdf7; }
 .agentDotGray { background: #666; }
 .agentThemeMenu { color: rgba(255,255,255,0.45); font-size: 18px; line-height: 1; }
-.agentThemeName { margin-top: 28px; font-size: 22px; line-height: 1.1; color: #f1f2f5; }
+.agentThemeName { margin-top: 18px; font-size: 18px; line-height: 1.1; color: #f1f2f5; }
 .agentThemeHandle { margin-top: 6px; color: #ffb7a3; font-weight: 600; }
-.agentThemeDivider { height: 1px; margin: 26px 0 24px; background: rgba(255,255,255,0.08); }
+.agentThemeDivider { height: 1px; margin: 18px 0 16px; background: rgba(255,255,255,0.08); }
 .agentThemeMetaRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .agentThemeStatus { color: #ff7a51; font-weight: 800; letter-spacing: 0.04em; }
 .agentThemeMetric { color: #aeb4c2; font-weight: 600; }
@@ -400,7 +400,7 @@
   left: 18px;
   right: 18px;
   bottom: 18px;
-  height: 44px;
+  height: 38px;
   border: 0;
   border-radius: 12px;
   background: rgba(255,255,255,0.06);
@@ -408,7 +408,7 @@
   font-weight: 700;
 }
 .agentThemeAddCard {
-  min-height: 420px;
+  min-height: 340px;
   border-radius: 22px;
   border: 1px dashed rgba(170, 183, 216, 0.18);
   background: rgba(255,255,255,0.02);
