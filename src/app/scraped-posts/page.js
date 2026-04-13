@@ -58,7 +58,7 @@ export default function ScrapedPostsPage() {
   };
 
   return (
-    <DashboardShell title="Post Scraping" subtitle="Keyword-based approved-source findings in a split view." searchPlaceholder="Keyword input..." actions={<button className={styles.actionButton} onClick={scrape}>Scrape</button>}>
+    <DashboardShell title="Post Scraping" subtitle="Keyword-based approved-source findings in a split view." searchPlaceholder="Keyword input...">
       <section className={styles.keywordBar}>
         <input className={styles.keywordInput} value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder="Enter keyword and scrape posts..." />
         <button className={styles.keywordScrapeButton} onClick={scrape}>Scrape</button>
