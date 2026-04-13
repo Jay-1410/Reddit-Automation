@@ -60,10 +60,6 @@ function DeliverAgentsContent() {
             </article>
           );
         })}
-        <article className={styles.agentThemeAddCard}>
-          <div className={styles.addAgentCircle}>+</div>
-          <p>ADD AGENT</p>
-        </article>
       </section>
 
       <section className={styles.historyPanelWrap}>
