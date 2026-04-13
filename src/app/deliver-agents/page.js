@@ -33,21 +33,37 @@ function DeliverAgentsContent() {
       title="Agent Command"
       subtitle="Operational management of automated Reddit identity clusters."
       searchPlaceholder="Quick search..."
-      actions={<><button className={styles.softButton}>Date Range</button><button className={styles.actionButton}>+ New Scrape</button></>}
     >
       <section className={styles.agentGrid}>
-        {agentCards.map((agent) => (
-          <article key={agent[0]} className={styles.agentCard}>
-            <div className={styles.agentTop}>
-              <div><div className={styles.agentAvatar}>{agent[0].slice(0, 2)}</div><h3>{agent[0]}</h3><p className={styles.note}>{agent[1]}</p></div>
-              <span className={styles.agentDots}>⋮</span>
-            </div>
-            <div className={styles.agentStatusRow}><span className={styles.statusNew}>{agent[2]}</span><span className={styles.agentMini}>{agent[3]}</span></div>
-            <div className={styles.agentProgress}><span className={styles.progressFill} style={{ width: agent[2] === "ACTIVE" ? "78%" : agent[2] === "BUSY" ? "62%" : agent[2] === "COOLDOWN" ? "34%" : "18%" }} /></div>
-            <button className={styles.agentDetailsButton}>VIEW DETAILS</button>
-          </article>
-        ))}
-        <article className={styles.addAgentCard}><div className={styles.addAgentCircle}>+</div><p>ADD AGENT</p></article>
+        {agentCards.map((agent, index) => {
+          const status = agent[2];
+          const width = status === "ACTIVE" ? "78%" : status === "BUSY" ? "52%" : status === "COOLDOWN" ? "34%" : "18%";
+          const dotClass = status === "ACTIVE" ? styles.agentDotOrange : status === "BUSY" ? styles.agentDotBlue : status === "COOLDOWN" ? styles.agentDotGray : styles.agentDotOrange;
+          return (
+            <article key={agent[0]} className={styles.agentThemeCard}>
+              <div className={styles.agentThemeTop}>
+                <div className={styles.agentPortraitWrap}>
+                  <div className={styles.agentPortrait}>{agent[0].slice(0, 2)}</div>
+                  <span className={`${styles.agentStatusDot} ${dotClass}`}></span>
+                </div>
+                <div className={styles.agentThemeMenu}>⋮</div>
+              </div>
+              <h3 className={styles.agentThemeName}>{agent[0]}</h3>
+              <p className={styles.agentThemeHandle}>{agent[1]}</p>
+              <div className={styles.agentThemeDivider} />
+              <div className={styles.agentThemeMetaRow}>
+                <span className={styles.agentThemeStatus}>{status}</span>
+                <span className={styles.agentThemeMetric}>{agent[3]}</span>
+              </div>
+              <div className={styles.agentThemeTrack}><span className={styles.agentThemeFill} style={{ width }} /></div>
+              <button className={styles.agentThemeButton}>VIEW DETAILS</button>
+            </article>
+          );
+        })}
+        <article className={styles.agentThemeAddCard}>
+          <div className={styles.addAgentCircle}>+</div>
+          <p>ADD AGENT</p>
+        </article>
       </section>
 
       <section className={styles.historyPanelWrap}>
